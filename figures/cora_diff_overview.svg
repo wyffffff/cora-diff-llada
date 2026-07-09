@@ -1,0 +1,173 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <style>
+      .bg { fill: #f7f8fb; }
+      .panel { fill: #ffffff; stroke: #d7dce8; stroke-width: 2; rx: 18; }
+      .panel-title { font: 700 30px Arial, Helvetica, sans-serif; fill: #162033; }
+      .subtitle { font: 400 19px Arial, Helvetica, sans-serif; fill: #586174; }
+      .label { font: 600 20px Arial, Helvetica, sans-serif; fill: #243044; }
+      .small { font: 400 17px Arial, Helvetica, sans-serif; fill: #5c6678; }
+      .tiny { font: 400 15px Arial, Helvetica, sans-serif; fill: #677184; }
+      .formula { font: 700 22px Arial, Helvetica, sans-serif; fill: #172033; }
+      .step { fill: #eef2f8; stroke: #cbd3df; stroke-width: 1.5; rx: 10; }
+      .mask { fill: #e8ebf3; stroke: #b9c1ce; stroke-width: 1.2; rx: 8; }
+      .token-blue { fill: #dceafe; stroke: #6fa3f7; stroke-width: 1.5; rx: 8; }
+      .token-green { fill: #dff7ea; stroke: #50b976; stroke-width: 1.5; rx: 8; }
+      .token-gold { fill: #fff0c9; stroke: #e8aa21; stroke-width: 1.5; rx: 8; }
+      .gate { fill: #f4f8ff; stroke: #a9c7ff; stroke-width: 2; rx: 14; }
+      .arrow { stroke: #42516b; stroke-width: 3; fill: none; marker-end: url(#arrowhead); }
+      .arrow-soft { stroke: #7b8799; stroke-width: 2.2; fill: none; marker-end: url(#arrowhead-soft); }
+      .skip { stroke: #d94f4f; stroke-width: 4; stroke-linecap: round; }
+      .accent { fill: #3366cc; }
+      .green { fill: #2b9b5f; }
+      .red { fill: #c83c3c; }
+      .mono { font: 700 18px "Consolas", "Courier New", monospace; fill: #263246; }
+    </style>
+    <marker id="arrowhead" markerWidth="11" markerHeight="8" refX="10" refY="4" orient="auto">
+      <path d="M0,0 L11,4 L0,8 Z" fill="#42516b"/>
+    </marker>
+    <marker id="arrowhead-soft" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <path d="M0,0 L10,3.5 L0,7 Z" fill="#7b8799"/>
+    </marker>
+    <linearGradient id="topbar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#315ddc"/>
+      <stop offset="100%" stop-color="#31a873"/>
+    </linearGradient>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1600" height="900"/>
+  <rect x="0" y="0" width="1600" height="10" fill="url(#topbar)"/>
+
+  <text x="80" y="72" class="panel-title" style="font-size:38px">CORA-Diff: Confidence-Oriented Residual Acceptance</text>
+  <text x="80" y="108" class="subtitle">Training-free acceleration for LLaDA-style diffusion decoding by accepting stable tokens and skipping redundant denoising steps.</text>
+
+  <!-- Main panels -->
+  <rect class="panel" x="70" y="155" width="440" height="610"/>
+  <rect class="panel" x="580" y="155" width="440" height="610"/>
+  <rect class="panel" x="1090" y="155" width="440" height="610"/>
+
+  <text x="105" y="205" class="panel-title">1. Dense LLaDA Decoding</text>
+  <text x="105" y="235" class="subtitle">Fixed horizon per generation block</text>
+
+  <!-- Left timeline -->
+  <g transform="translate(105,280)">
+    <rect class="step" x="0" y="0" width="350" height="76"/>
+    <text x="18" y="28" class="label">Step 1</text>
+    <g transform="translate(120,18)">
+      <rect class="mask" x="0" y="0" width="42" height="42"/><text x="12" y="28" class="mono">M</text>
+      <rect class="mask" x="50" y="0" width="42" height="42"/><text x="62" y="28" class="mono">M</text>
+      <rect class="mask" x="100" y="0" width="42" height="42"/><text x="112" y="28" class="mono">M</text>
+      <rect class="mask" x="150" y="0" width="42" height="42"/><text x="162" y="28" class="mono">M</text>
+    </g>
+
+    <path class="arrow-soft" d="M175,88 L175,122"/>
+    <rect class="step" x="0" y="135" width="350" height="76"/>
+    <text x="18" y="163" class="label">Step 2</text>
+    <g transform="translate(120,153)">
+      <rect class="token-blue" x="0" y="0" width="42" height="42"/><text x="13" y="28" class="mono">A</text>
+      <rect class="mask" x="50" y="0" width="42" height="42"/><text x="62" y="28" class="mono">M</text>
+      <rect class="mask" x="100" y="0" width="42" height="42"/><text x="112" y="28" class="mono">M</text>
+      <rect class="mask" x="150" y="0" width="42" height="42"/><text x="162" y="28" class="mono">M</text>
+    </g>
+
+    <path class="arrow-soft" d="M175,223 L175,257"/>
+    <rect class="step" x="0" y="270" width="350" height="76"/>
+    <text x="18" y="298" class="label">Step k</text>
+    <g transform="translate(120,288)">
+      <rect class="token-blue" x="0" y="0" width="42" height="42"/><text x="13" y="28" class="mono">A</text>
+      <rect class="token-blue" x="50" y="0" width="42" height="42"/><text x="63" y="28" class="mono">B</text>
+      <rect class="mask" x="100" y="0" width="42" height="42"/><text x="112" y="28" class="mono">M</text>
+      <rect class="mask" x="150" y="0" width="42" height="42"/><text x="162" y="28" class="mono">M</text>
+    </g>
+
+    <text x="122" y="390" class="small">stable tokens are still processed</text>
+    <text x="122" y="416" class="small">until the scheduled final step</text>
+    <line class="skip" x1="83" y1="382" x2="104" y2="403"/>
+    <line class="skip" x1="104" y1="382" x2="83" y2="403"/>
+  </g>
+
+  <!-- Center panel -->
+  <text x="615" y="205" class="panel-title">2. CORA-Diff Token Test</text>
+  <text x="615" y="235" class="subtitle">Use signals already available during decoding</text>
+
+  <g transform="translate(625,285)">
+    <rect class="gate" x="50" y="0" width="310" height="82"/>
+    <text x="88" y="33" class="label">Dense LLaDA forward</text>
+    <text x="93" y="61" class="small">logits and token probabilities</text>
+    <path class="arrow-soft" d="M205,94 L205,130"/>
+
+    <rect class="gate" x="0" y="145" width="185" height="92"/>
+    <text x="30" y="178" class="label">Confidence</text>
+    <text x="35" y="207" class="mono">c_i^(s)</text>
+
+    <rect class="gate" x="225" y="145" width="185" height="92"/>
+    <text x="252" y="178" class="label">Persistence</text>
+    <text x="263" y="207" class="mono">m_i^(s)</text>
+
+    <path class="arrow-soft" d="M92,250 L170,305"/>
+    <path class="arrow-soft" d="M318,250 L240,305"/>
+
+    <rect x="45" y="320" width="320" height="118" rx="16" fill="#fff9eb" stroke="#e8b64f" stroke-width="2"/>
+    <text x="82" y="358" class="formula">Accept if</text>
+    <text x="75" y="397" class="mono">c_i^(s) >= delta_p</text>
+    <text x="104" y="424" class="mono">and m_i^(s) >= m</text>
+
+    <path class="arrow-soft" d="M205,450 L205,494"/>
+    <rect x="72" y="510" width="266" height="66" rx="14" fill="#e9f7ef" stroke="#55b97b" stroke-width="2"/>
+    <text x="120" y="550" class="label">Residual risk is low</text>
+  </g>
+
+  <!-- Right panel -->
+  <text x="1125" y="205" class="panel-title">3. Early Acceptance</text>
+  <text x="1125" y="235" class="subtitle">Accepted tokens stay as visible context</text>
+
+  <g transform="translate(1128,288)">
+    <text x="0" y="0" class="label">Before CORA acceptance</text>
+    <g transform="translate(12,22)">
+      <rect class="token-blue" x="0" y="0" width="48" height="48"/><text x="16" y="31" class="mono">A</text>
+      <rect class="mask" x="58" y="0" width="48" height="48"/><text x="72" y="31" class="mono">M</text>
+      <rect class="mask" x="116" y="0" width="48" height="48"/><text x="130" y="31" class="mono">M</text>
+      <rect class="mask" x="174" y="0" width="48" height="48"/><text x="188" y="31" class="mono">M</text>
+      <rect class="mask" x="232" y="0" width="48" height="48"/><text x="246" y="31" class="mono">M</text>
+    </g>
+
+    <path class="arrow-soft" d="M155,92 L155,132"/>
+
+    <text x="0" y="160" class="label">After stable-token acceptance</text>
+    <g transform="translate(12,182)">
+      <rect class="token-green" x="0" y="0" width="48" height="48"/><text x="16" y="31" class="mono">A</text>
+      <rect class="token-green" x="58" y="0" width="48" height="48"/><text x="74" y="31" class="mono">B</text>
+      <rect class="token-green" x="116" y="0" width="48" height="48"/><text x="132" y="31" class="mono">C</text>
+      <rect class="token-gold" x="174" y="0" width="48" height="48"/><text x="189" y="31" class="mono">D</text>
+      <rect class="mask" x="232" y="0" width="48" height="48"/><text x="246" y="31" class="mono">M</text>
+    </g>
+    <text x="15" y="260" class="small">green: fixed accepted tokens</text>
+    <text x="15" y="286" class="small">gray: unresolved tokens continue</text>
+
+    <rect x="0" y="330" width="348" height="120" rx="16" fill="#eefaf4" stroke="#61bd83" stroke-width="2"/>
+    <text x="26" y="368" class="label">If block is complete</text>
+    <text x="26" y="397" class="small">skip remaining dense forwards</text>
+    <g transform="translate(28,420)">
+      <text x="0" y="0" class="tiny">k+1</text>
+      <text x="72" y="0" class="tiny">k+2</text>
+      <text x="144" y="0" class="tiny">...</text>
+      <text x="212" y="0" class="tiny">S</text>
+      <line class="skip" x1="0" y1="16" x2="46" y2="16"/>
+      <line class="skip" x1="78" y1="16" x2="124" y2="16"/>
+      <line class="skip" x1="202" y1="16" x2="248" y2="16"/>
+    </g>
+
+    <rect x="0" y="485" width="348" height="60" rx="14" fill="#edf3ff" stroke="#8ba9ef" stroke-width="2"/>
+    <text x="35" y="522" class="label">Actual denoising-step ratio ↓</text>
+  </g>
+
+  <!-- Inter-panel arrows -->
+  <path class="arrow" d="M520,460 C545,460 552,460 570,460"/>
+  <path class="arrow" d="M1030,460 C1055,460 1062,460 1080,460"/>
+
+  <!-- Bottom note -->
+  <rect x="250" y="805" width="1100" height="58" rx="16" fill="#ffffff" stroke="#d7dce8" stroke-width="2"/>
+  <text x="284" y="842" class="label">
+    Key idea: accept tokens only when they are confident and temporally stable, then terminate completed blocks to reduce real dense forward passes.
+  </text>
+</svg>

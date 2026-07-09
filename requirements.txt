@@ -1,0 +1,13 @@
+torch>=2.1
+transformers
+accelerate==0.34.2
+lm_eval==0.4.9.1
+datasets
+tqdm
+numpy
+antlr4-python3-runtime==4.11
+math_verify
+sympy
+hf_xet
+polars
+matplotlib
