@@ -24,8 +24,6 @@ cora_diff_llada_open_source/
 
   docs/
     ARCHITECTURE.md                 # Detailed directory and code map
-    AUTODL.md                       # AutoDL/server quick start
-    EXPERIMENT_RESULTS.md           # Current experiment notes/results
 
   figures/
     cora_diff_overview.svg
@@ -33,7 +31,6 @@ cora_diff_llada_open_source/
   scripts/
     smoke.sh                        # Recommended quick sanity check
     reproduce_main_table.sh          # Full fair comparison entry
-    dapd_remaining_no_math1024.sh    # DAPD resume helper
     three_method_compare.sh          # Original/Learn2PD/CORA helper
 
   llada/
@@ -54,19 +51,23 @@ cora_diff_llada_open_source/
       dapd/                         # DAPD vendored implementation
       UPSTREAM_SOURCES.md
 
-    run_*.sh                        # Detailed experiment/ablation scripts
+    run_smoke_open_source.sh         # Low-level smoke-test launcher
+    run_reproduce_main_table.sh      # Low-level full-table launcher
+    run_best_hparams_fair_block32_full.sh
+    run_three_method_compare.sh
 ```
 
 ## What Goes Where
 
 - Use `scripts/` for public entry points that a new user should run first.
 - Use `configs/` for environment-variable examples and reproducible settings.
-- Use `docs/` for explanations, server notes, result notes, and design details.
+- Use `docs/` for architecture and design details.
 - Use `figures/` for images referenced by docs.
 - Use `llada/eval_llada.py` for the lm-evaluation-harness adapter.
 - Use `llada/generate.py` for decoding method dispatch and generation logic.
 - Use `llada/model/` for LLaDA/CORA-Diff model code.
 - Use `llada/vendor_methods/` for third-party baseline method implementations.
+- Keep `llada/run_*.sh` limited to maintained launchers used by `scripts/`.
 - Keep generated logs and benchmark outputs under `llada/output/`; this path is
   ignored and should not be committed.
 
@@ -241,8 +242,6 @@ python extract_log_table.py output/ablations/best_hparams_fair_block32_full_prop
 ## More Documentation
 
 - `docs/ARCHITECTURE.md`: detailed file-by-file map.
-- `docs/AUTODL.md`: AutoDL/server setup and older experiment commands.
-- `docs/EXPERIMENT_RESULTS.md`: current result notes.
 - `llada/vendor_methods/UPSTREAM_SOURCES.md`: upstream baseline attribution.
 
 ## Citation And Attribution

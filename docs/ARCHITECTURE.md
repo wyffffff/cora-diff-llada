@@ -56,12 +56,10 @@ Long-form documentation lives here.
 
 ```text
 docs/ARCHITECTURE.md        # this file
-docs/AUTODL.md              # server setup notes
-docs/EXPERIMENT_RESULTS.md  # result notes
 ```
 
-Keep the root README focused on quick start and major concepts. Put detailed
-server notes, ablation notes, and troubleshooting here.
+Keep the root README focused on quick start and major concepts. Put longer
+design and maintenance notes here.
 
 ## `scripts/`
 
@@ -71,7 +69,6 @@ that `cd` into `llada/` and call the tested experiment scripts there.
 ```text
 scripts/smoke.sh
 scripts/reproduce_main_table.sh
-scripts/dapd_remaining_no_math1024.sh
 scripts/three_method_compare.sh
 ```
 
@@ -94,12 +91,13 @@ llada/
   eval_llada.py
   generate.py
   extract_log_table.py
-  calibrate_cora_budget.py
-  collect_persistence_risk.py
   layer_2_flan.pth
   model/
   vendor_methods/
-  run_*.sh
+  run_smoke_open_source.sh
+  run_reproduce_main_table.sh
+  run_best_hparams_fair_block32_full.sh
+  run_three_method_compare.sh
 ```
 
 ### `llada/eval_llada.py`
@@ -155,14 +153,19 @@ vendor_methods/UPSTREAM_SOURCES.md
 Keep third-party code isolated. If local compatibility patches are needed,
 document them in `UPSTREAM_SOURCES.md`.
 
-### `llada/run_*.sh`
+### Maintained `llada/run_*.sh` Launchers
 
-Detailed experiment scripts live next to `eval_llada.py` because they invoke it
-directly.
+The maintained low-level experiment scripts live next to `eval_llada.py`
+because they invoke it directly:
 
-Recommended public entry points are still in root `scripts/`. The `llada/run_*`
-files are useful when reproducing exact ablations, resuming server runs, or
-debugging a single method.
+```text
+run_smoke_open_source.sh
+run_reproduce_main_table.sh
+run_best_hparams_fair_block32_full.sh
+run_three_method_compare.sh
+```
+
+Recommended public entry points are still in root `scripts/`.
 
 ## Adding A New Baseline Method
 
@@ -175,7 +178,7 @@ debugging a single method.
 
 ## Adding A New Experiment Script
 
-1. Put exact low-level experiment scripts under `llada/run_<name>.sh`.
+1. Put low-level maintained experiment scripts under `llada/run_<name>.sh`.
 2. If it is a recommended public command, add a root wrapper under `scripts/`.
 3. Write outputs under `llada/output/<experiment_name>/`.
 4. Do not commit generated logs or benchmark outputs.
